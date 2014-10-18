@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -15,59 +15,34 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Uber Price:"
-        android:id="@+id/textView_uber_price"
+        android:layout_weight="1"
+        android:layout_marginTop="45dp"
+        android:text="@string/price"
+        android:id="@+id/textView_price"
         android:textSize="20dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/map"
+        android:layout_centerHorizontal="true" />
+
 
     <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="40dp"
-        android:id="@+id/editText_trip"
-        android:layout_gravity="center_horizontal" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Restaurant Price:"
-        android:id="@+id/textView_rest_price"
-        android:textSize="20dp"
-        android:layout_gravity="center_horizontal" />
+        android:inputType="number"
+        android:hint="@string/inputHint"
+        android:textAlignment="center"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:layout_below="@+id/textView_price"
+        android:layout_centerHorizontal="true" />
 
-    <RadioGroup
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit"
+        android:id="@+id/submit"
+        android:layout_below="@id/editText"
+        android:layout_centerHorizontal="true"
+        android:onClick="calculate"/>
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="$"
-            android:id="@+id/radioButton" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="$$"
-            android:id="@+id/radioButton2" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="$$$"
-            android:id="@+id/radioButton3" />
-
-    </RadioGroup>
-
-
-
-</LinearLayout>
+</RelativeLayout>

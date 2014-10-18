@@ -1,9 +1,12 @@
 package com.hadlag.omar.pricedtrips;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -15,23 +18,35 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivity extends Activity {
 
+    public int PRICE;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         GoogleMap map = ((MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map)).getMap();
-        LatLng PERTH = new LatLng(-31.90, 115.86);
+        LatLng ME = new LatLng(47.655481, -122.305098);
         map.setMyLocationEnabled(true);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(PERTH, 13));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(ME, 12));
 
-        Marker perth = map.addMarker(new MarkerOptions()
-                .position(PERTH)
+        Marker me = map.addMarker(new MarkerOptions()
+                .position(ME)
                 .draggable(true));
-        double lat = perth.getPosition().latitude;
-        double lon = perth.getPosition().longitude;
+        double lat = me.getPosition().latitude;
+        double lon = me.getPosition().longitude;
     }
 
+    public void calculate(View view) {
+        Intent intent = new Intent(this, Results.class);
+
+        EditText txt = (EditText) findViewById(R.id.editText);
+        PRICE = Integer.parseInt(txt.getText().toString());
+        intent.putExtra("Price", PRICE);
+        startActivity(intent);
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
