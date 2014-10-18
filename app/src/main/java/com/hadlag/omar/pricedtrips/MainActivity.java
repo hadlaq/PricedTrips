@@ -49,12 +49,18 @@ public class MainActivity extends Activity {
     public void calculate(View view) {
         Intent intent = new Intent(this, Results.class);
 
-        EditText txt = (EditText) findViewById(R.id.editText);
-        Price = Integer.parseInt(txt.getText().toString());
+        EditText txtlat = (EditText) findViewById(R.id.edt_e_lat);
+        EditText txtlon = (EditText) findViewById(R.id.edt_e_lon);
+        /*if (txt.getText().toString().isEmpty()) {
+            Price = 0;
+        } else {
+            Price = Integer.parseInt(txt.getText().toString());
+        }*/
         Bundle extras = new Bundle();
-        extras.putInt("Price", Price);
-        extras.putDouble("Longitude", lon);
-        extras.putDouble("Latitude", lat);
+        extras.putDouble("Longitude1", lon);
+        extras.putDouble("Latitude1", lat);
+        extras.putDouble("Longitude2", Double.parseDouble(txtlon.getText().toString()));
+        extras.putDouble("Latitude2", Double.parseDouble(txtlat.getText().toString()));
         intent.putExtras(extras);
         startActivity(intent);
 

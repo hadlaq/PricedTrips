@@ -16,24 +16,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginTop="45dp"
-        android:text="@string/price"
+        android:layout_marginTop="25dp"
+        android:text="Calculate Uber fare:"
         android:id="@+id/textView_price"
         android:textSize="20dp"
         android:layout_gravity="center_horizontal"
         android:layout_below="@+id/map"
         android:layout_centerHorizontal="true" />
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="End Longitude"
+        android:textAlignment="center"
+        android:ems="10"
+        android:id="@+id/edt_e_lon"
+        android:layout_below="@+id/textView_price"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:hint="@string/inputHint"
+        android:hint="End Latitude"
         android:textAlignment="center"
         android:ems="10"
-        android:id="@+id/editText"
-        android:layout_below="@+id/textView_price"
+        android:id="@+id/edt_e_lat"
+        android:layout_below="@+id/edt_e_lon"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -41,7 +49,7 @@
         android:layout_height="wrap_content"
         android:text="@string/submit"
         android:id="@+id/submit"
-        android:layout_below="@id/editText"
+        android:layout_below="@id/edt_e_lat"
         android:layout_centerHorizontal="true"
         android:onClick="calculate"/>
 
