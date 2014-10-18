@@ -2,7 +2,6 @@ package com.hadlag.omar.pricedtrips;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -32,7 +31,7 @@ public class Results extends Activity {
     TextView t1;
     TextView t2;
     TextView t4;
-    String x = "..";
+    String filler = "..";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,19 +108,19 @@ public class Results extends Activity {
         protected void onPostExecute(String result) {
             try {
                 JSONObject json1 = new JSONObject(result);
-                JSONArray json2 = new JSONArray(json1.getString("prices"));
-                JSONObject json3 = json2.getJSONObject(0);
-                x = json3.getString("estimate");
-                String n = json3.getString("duration");
-                n = n.trim();
-                int y = Integer.parseInt(n);
-                double z = y * 1.0 / 60;
-                z = z * 10;
-                y = (int) z;
-                z = y * 1.0 / 10;
-                String g = z + " minutes";
-                t4.setText(g);
-                t2.setText(x);
+                JSONArray prices = new JSONArray(json1.getString("prices"));
+                JSONObject json3 = prices.getJSONObject(0);
+                filler = json3.getString("estimate");
+                String durationString = json3.getString("duration");
+                durationString = durationString.trim();
+                int duration = Integer.parseInt(durationString);
+                double durationMinutes = duration * 1.0 / 60;
+                durationMinutes *= 10;
+                duration = (int) durationMinutes;
+                durationMinutes = duration * 1.0 / 10;
+                String finalDuration = durationMinutes + " minutes";
+                t4.setText(finalDuration);
+                t2.setText(filler);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
