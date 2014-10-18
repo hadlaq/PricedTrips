@@ -32,7 +32,7 @@ public class Results extends Activity {
     TextView t1;
     TextView t2;
     TextView t4;
-    String x = ".";
+    String x = "..";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,18 +112,19 @@ public class Results extends Activity {
                 JSONArray json2 = new JSONArray(json1.getString("prices"));
                 JSONObject json3 = json2.getJSONObject(0);
                 x = json3.getString("estimate");
-                int y = json3.getInt("duration");
+                String n = json3.getString("duration");
+                n = n.trim();
+                int y = Integer.parseInt(n);
                 double z = y * 1.0 / 60;
                 z = z * 10;
                 y = (int) z;
                 z = y * 1.0 / 10;
                 String g = z + " minutes";
                 t4.setText(g);
+                t2.setText(x);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-            t2.setText(x);
         }
     }
 }
