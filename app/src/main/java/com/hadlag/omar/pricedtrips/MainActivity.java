@@ -4,6 +4,13 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 
 public class MainActivity extends Activity {
@@ -12,6 +19,15 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        GoogleMap map = ((MapFragment) getFragmentManager()
+                .findFragmentById(R.id.map)).getMap();
+        map.setMyLocationEnabled(true);
+        LatLng PERTH = new LatLng(-31.90, 115.86);
+        Marker perth = map.addMarker(new MarkerOptions()
+                .position(PERTH)
+                .draggable(true));
+        double lat = perth.getPosition().latitude;
+        double lon = perth.getPosition().longitude;
     }
 
 

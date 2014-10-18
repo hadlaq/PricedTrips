@@ -1,5 +1,6 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -11,4 +12,62 @@
         android:layout_height="250dip"
         android:name="com.google.android.gms.maps.MapFragment"/>
 
-</RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Uber Price:"
+        android:id="@+id/textView_uber_price"
+        android:textSize="20dp"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="40dp"
+        android:id="@+id/editText_trip"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restaurant Price:"
+        android:id="@+id/textView_rest_price"
+        android:textSize="20dp"
+        android:layout_gravity="center_horizontal" />
+
+    <RadioGroup
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="$"
+            android:id="@+id/radioButton" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="$$"
+            android:id="@+id/radioButton2" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="$$$"
+            android:id="@+id/radioButton3" />
+
+    </RadioGroup>
+
+
+
+</LinearLayout>
