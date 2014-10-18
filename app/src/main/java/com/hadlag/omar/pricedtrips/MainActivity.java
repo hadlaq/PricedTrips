@@ -23,9 +23,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MainActivity extends Activity {
 
     public int Price;
-    public double lon;
-    public double lat;
+    public double lon1;
+    public double lat1;
+    public double lon2;
+    public double lat2;
     public GoogleMap map;
+    public Marker marker;
 
     @Override
      protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +41,30 @@ public class MainActivity extends Activity {
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         Location me = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if (me != null) {
-            lon = me.getLongitude();
-            lat = me.getLatitude();
-            LatLng ME = new LatLng(lat, lon);
+            lon1 = me.getLongitude();
+            lat1 = me.getLatitude();
+            LatLng ME = new LatLng(lat1, lon1);
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(ME, 12));
+            marker = map.addMarker(new MarkerOptions().position(ME).draggable(true));
         }
+
+        map.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+            @Override
+            public void onMarkerDrag(Marker marker) {
+
+            }
+
+            @Override
+            public void onMarkerDragStart(Marker marker) {
+
+            }
+
+            @Override
+            public void onMarkerDragEnd(Marker marker) {
+                lon2 = marker.getPosition().longitude;
+                lat2 = marker.getPosition().latitude;
+            }
+        });
 
     }
 
@@ -56,11 +78,18 @@ public class MainActivity extends Activity {
         } else {
             Price = Integer.parseInt(txt.getText().toString());
         }*/
+        if (txtlat.getText().toString().isEmpty() || txtlon.getText().toString().isEmpty()) {
+            lon2 = marker.getPosition().longitude;
+            lat2 = marker.getPosition().latitude;
+        } else {
+            lon2 = Double.parseDouble(txtlon.getText().toString());
+            lat2 = Double.parseDouble(txtlat.getText().toString());
+        }
         Bundle extras = new Bundle();
-        extras.putDouble("Longitude1", lon);
-        extras.putDouble("Latitude1", lat);
-        extras.putDouble("Longitude2", Double.parseDouble(txtlon.getText().toString()));
-        extras.putDouble("Latitude2", Double.parseDouble(txtlat.getText().toString()));
+        extras.putDouble("Longitude1", lon1);
+        extras.putDouble("Latitude1", lat1);
+        extras.putDouble("Longitude2", lon2);
+        extras.putDouble("Latitude2", lat2);
         intent.putExtras(extras);
         startActivity(intent);
 
@@ -87,10 +116,11 @@ public class MainActivity extends Activity {
 
     LocationListener locationListener = new LocationListener() {
         public void onLocationChanged(Location me) {
-            lon = me.getLongitude();
-            lat = me.getLatitude();
-            LatLng ME = new LatLng(lat, lon);
+            lon1 = me.getLongitude();
+            lat1 = me.getLatitude();
+            LatLng ME = new LatLng(lat1, lon1);
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(ME, 12));
         }
     };
+
 }
