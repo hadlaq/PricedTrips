@@ -9,5 +9,8 @@
     <string name="price">How much do you want to spend?</string>
     <string name="inputHint">Enter Dollar Amount</string>
     <string name="title_activity_results">Results</string>
+    <string name="instructions">Calculate Uber Fare:</string>
+    <string name="longitude">End Longitude</string>
+    <string name="latitude">End Latitude</string>
 
 </resources>
