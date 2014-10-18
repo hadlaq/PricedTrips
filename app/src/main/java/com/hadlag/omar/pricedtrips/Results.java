@@ -5,19 +5,35 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class Results extends Activity {
 
-    public int PRICE;
+    public int Price;
+    public double lon;
+    public double lat;
+
+    TextView t1;
+    TextView t2;
+    TextView t3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
 
-        Intent intent = getIntent();
-        PRICE = intent.getIntExtra("price", 0);
+        t1 = (TextView) findViewById(R.id.textView);
+        t2 = (TextView) findViewById(R.id.textView2);
+        t3 = (TextView) findViewById(R.id.textView3);
+
+        Bundle extras = getIntent().getExtras();
+        lon = extras.getDouble("Longitude");
+        lat = extras.getDouble("Latitude");
+        Price = extras.getInt("Price");
+        t1.setText(Price + "");
+        t2.setText(lat + "");
+        t3.setText(lon + "");
 
     }
 

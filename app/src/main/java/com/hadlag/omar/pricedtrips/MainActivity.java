@@ -1,13 +1,17 @@
 package com.hadlag.omar.pricedtrips;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -18,32 +22,40 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivity extends Activity {
 
-    public int PRICE;
+    public int Price;
+    public double lon;
+    public double lat;
+    public GoogleMap map;
 
     @Override
      protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        GoogleMap map = ((MapFragment) getFragmentManager()
+        map = ((MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map)).getMap();
-        LatLng ME = new LatLng(47.655481, -122.305098);
         map.setMyLocationEnabled(true);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(ME, 12));
+        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        Location me = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if (me != null) {
+            lon = me.getLongitude();
+            lat = me.getLatitude();
+            LatLng ME = new LatLng(lat, lon);
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(ME, 12));
+        }
 
-        Marker me = map.addMarker(new MarkerOptions()
-                .position(ME)
-                .draggable(true));
-        double lat = me.getPosition().latitude;
-        double lon = me.getPosition().longitude;
     }
 
     public void calculate(View view) {
         Intent intent = new Intent(this, Results.class);
 
         EditText txt = (EditText) findViewById(R.id.editText);
-        PRICE = Integer.parseInt(txt.getText().toString());
-        intent.putExtra("Price", PRICE);
+        Price = Integer.parseInt(txt.getText().toString());
+        Bundle extras = new Bundle();
+        extras.putInt("Price", Price);
+        extras.putDouble("Longitude", lon);
+        extras.putDouble("Latitude", lat);
+        intent.putExtras(extras);
         startActivity(intent);
 
     }
@@ -66,4 +78,13 @@ public class MainActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    LocationListener locationListener = new LocationListener() {
+        public void onLocationChanged(Location me) {
+            lon = me.getLongitude();
+            lat = me.getLatitude();
+            LatLng ME = new LatLng(lat, lon);
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(ME, 12));
+        }
+    };
 }
