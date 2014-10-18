@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -21,8 +21,10 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         GoogleMap map = ((MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map)).getMap();
-        map.setMyLocationEnabled(true);
         LatLng PERTH = new LatLng(-31.90, 115.86);
+        map.setMyLocationEnabled(true);
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(PERTH, 13));
+
         Marker perth = map.addMarker(new MarkerOptions()
                 .position(PERTH)
                 .draggable(true));
