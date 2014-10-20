@@ -31,7 +31,7 @@ public class Results extends Activity {
     TextView t1;
     TextView t2;
     TextView t4;
-    String filler = "..";
+    String filler = "Not Available";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,18 +107,25 @@ public class Results extends Activity {
         @Override
         protected void onPostExecute(String result) {
             try {
+                // initialize JSON objects
                 JSONObject json1 = new JSONObject(result);
                 JSONArray prices = new JSONArray(json1.getString("prices"));
                 JSONObject json3 = prices.getJSONObject(0);
+
+                // get time and price
                 filler = json3.getString("estimate");
                 String durationString = json3.getString("duration");
                 durationString = durationString.trim();
+
+                // edit duration time and turn to minutes
                 int duration = Integer.parseInt(durationString);
                 double durationMinutes = duration * 1.0 / 60;
                 durationMinutes *= 10;
                 duration = (int) durationMinutes;
                 durationMinutes = duration * 1.0 / 10;
                 String finalDuration = durationMinutes + " minutes";
+
+                // display data
                 t4.setText(finalDuration);
                 t2.setText(filler);
             } catch (JSONException e) {
